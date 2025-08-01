@@ -10,7 +10,8 @@
  */
 function add(a, b) {
   // TODO: Return the sum of a and b
-  
+  let c = 0;
+  return c = a + b;
 }
 
 /**
@@ -23,7 +24,7 @@ function add(a, b) {
  */
 const multiply = (a, b) => {
   // TODO: Return the product of a and b
-  
+  return c = a * b;
 };
 
 /**
@@ -35,7 +36,7 @@ const multiply = (a, b) => {
  */
 function greetUser(name = "Guest") {
   // TODO: Return a greeting message using the name parameter
-  
+  return `Hello, ${name}!`;
 }
 
 /**
@@ -48,7 +49,7 @@ function greetUser(name = "Guest") {
 function calculateTotal(price, taxRate) {
   // TODO: Calculate and return the total price including tax
   // Formula: price + (price * taxRate)
-  
+  return price + (price * taxRate);
 }
 
 /**
@@ -61,6 +62,12 @@ function calculateTotal(price, taxRate) {
 function createCounter() {
   // TODO: Create a counter variable and return a function that increments it
   // Hint: Use closure to maintain the counter state
+  let count = 0;
+  
+  return function() {
+    count++;
+    return count;
+  };
   
 }
 

@@ -11,11 +11,13 @@
  */
 function createPersonInfo() {
   // TODO: Create and return an object with the specified properties
-  const name  = 'Alex Johnson';
-  const age  = 28;
-  const city  = 'New York';
-  const isEmployed  = true;
-  return name + " " + age + " " + city + " " + isEmployed;
+ const person = {
+    name: "Alex Johnson",
+    age: 28,
+    city: "New York",
+    isEmployed: true
+  };
+  return person;
 }
 
 /**
@@ -43,7 +45,7 @@ function calculateAge(birthYear) {
  */
 function formatFullName(firstName, lastName) {
   // TODO: Combine first and last name with a space between them
-  console.log(`${firstName}` + `${lastName}` )
+  return firstName + " " + lastName;
 }
 
 /**

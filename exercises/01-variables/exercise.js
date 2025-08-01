@@ -30,7 +30,7 @@ function calculateAge(birthYear) {
   const currentYear = 2024;
   let age = 0;
   age = currentYear - birthYear;
-  console.log(age)
+  return age;
 
 }
 

@@ -11,7 +11,13 @@
  */
 function createPersonInfo() {
   // TODO: Create and return an object with the specified properties
-  
+  const person = {
+    name : "Alex Johnson",
+    age : 28,
+    city : "New York",
+    isEmployed : true
+  };
+  return person;
 }
 
 /**
@@ -23,7 +29,10 @@ function createPersonInfo() {
  */
 function calculateAge(birthYear) {
   // TODO: Calculate age by subtracting birth year from 2024
-  
+  let x = 2024;
+  let y = birthYear;
+  let number = x-y;
+  return number;
 }
 
 /**
@@ -35,7 +44,8 @@ function calculateAge(birthYear) {
  */
 function formatFullName(firstName, lastName) {
   // TODO: Combine first and last name with a space between them
-  
+  name = `${firstName} +" " + ${lastName};`
+  return name;
 }
 
 /**
@@ -46,9 +56,15 @@ function formatFullName(firstName, lastName) {
  */
 function checkAdult(age) {
   // TODO: Return true if age is 18 or greater, false otherwise
-  
-}
+  let Adult = age>=18;
 
+  if (Adult){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
 /**
  * Task 5: Convert Temperature
  * Convert temperature from Celsius to Fahrenheit
@@ -58,7 +74,9 @@ function checkAdult(age) {
  */
 function convertTemperature(celsius) {
   // TODO: Convert Celsius to Fahrenheit using the formula
-  
+  let C = celsius;
+  let Fahrenheit = (C * 9/5) + 32
+  return `the temperature in farenheit is ${Fahrenheit}F`;
 }
 
 /**
@@ -70,7 +88,7 @@ function convertTemperature(celsius) {
  */
 function createGreeting(name, timeOfDay) {
   // TODO: Create a greeting message using template literals or string concatenation
-  
+  return `Good ${timeOfDay}, ${name}`;
 }
 
 // DO NOT MODIFY: Export functions for testing

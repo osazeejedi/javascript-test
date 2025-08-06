@@ -337,9 +337,14 @@ function calculateTotalIncome(month) {
     // 2. Check if transaction.type === 'income'
     // 3. Check if transaction is in the specified month
     // 4. Add transaction.amount to total
-    
+    for (const transaction of sampleTransactions) {
+        if (transaction.type === 'income' && isTransactionInMonth(transaction, month)) {
+            total += transaction.amount;
+        }
+    }
     return total;
 }
+
 
 /**
  * TODO 2: Calculate total expenses for a specific month
@@ -362,7 +367,11 @@ function calculateTotalExpenses(month) {
     let total = 0;
     
     // Your code here
-    
+    for (const transaction of sampleTransactions){
+        if (transaction.type === 'expense' && isTransactionInMonth(transaction, month)){
+            total += transaction.amount;
+        }
+    }
     return total;
 }
 
@@ -385,9 +394,12 @@ function calculateTotalExpenses(month) {
 function calculateNetBalance(month) {
     // TODO: Implement this function
     // Hint: This should be a simple calculation using the two functions above
-    
-    return 0; // Replace with your calculation
+
+    const income = calculateTotalIncome(month);
+    const expenses = calculateTotalExpenses(month);
+    return income - expenses;
 }
+
 
 /**
  * TODO 4: Calculate spending by category for a specific month
@@ -423,10 +435,20 @@ function calculateSpendingByCategory(month) {
     // 1. Loop through sampleTransactions
     // 2. Check if transaction is expense and in specified month
     // 3. Add amount to categoryTotals[transaction.category]
-    
+
+    for (const transaction of sampleTransactions) {
+        if (transaction.type === 'expense' && isTransactionInMonth(transaction, month)) {
+            const category = transaction.category;
+            if (!categoryTotals[category]) {
+                categoryTotals[category] = 0;
+            }
+            categoryTotals[category] += transaction.amount;
+        }
+    }
     return categoryTotals;
 }
 
+ 
 /**
  * TODO 5: Calculate average transaction amount by type
  * 
@@ -455,7 +477,14 @@ function calculateAverageTransaction(type, month) {
     // 2. Check if transaction matches type and month
     // 3. Add to total and increment count
     // 4. Return total / count (handle division by zero)
-    
+   
+    for (const transaction of sampleTransactions) {
+        if (transaction.type === type && isTransactionInMonth(transaction, month)) {
+            total += transaction.amount;
+            count++;
+        }
+    }
+
     return count > 0 ? total / count : 0;
 }
 
@@ -485,7 +514,15 @@ function findLargestExpense(month) {
     // 2. Check if transaction is expense and in specified month
     // 3. Compare amount with largestAmount
     // 4. Update largestTransaction and largestAmount if bigger
-    
+
+    for (const transaction of sampleTransactions) {
+        if (transaction.type === 'expense' && isTransactionInMonth(transaction, month)) {
+            if (transaction.amount > largestAmount) {
+                largestAmount = transaction.amount;
+                largestTransaction = transaction;
+            }
+        }
+    }
     return largestTransaction;
 }
 
@@ -515,8 +552,10 @@ function calculateSavingsRate(month) {
     // 1. Calculate savings (income - expenses)
     // 2. Calculate percentage (savings / income * 100)
     // 3. Handle case where income is 0
-    
-    return 0; // Replace with your calculation
+
+    if (income === 0) return 0;
+    const savings = income - expenses;
+    return parseFloat(((savings / income) * 100).toFixed(2));
 }
 
 /**
@@ -544,13 +583,19 @@ function calculateSavingsRate(month) {
 function getMonthSummary(month) {
     // TODO: Implement this function
     // Use the functions you've already implemented
-    
+
+    const totalIncome = calculateTotalIncome(month);
+    const totalExpenses = calculateTotalExpenses(month);
+    const netBalance = totalIncome - totalExpenses;
+    const savingsRate = calculateSavingsRate(month);
+    const transactionCount = sampleTransactions.filter(t => isTransactionInMonth(t, month)).length;
+
     return {
-        totalIncome: 0,
-        totalExpenses: 0,
-        netBalance: 0,
-        savingsRate: 0,
-        transactionCount: 0
+        totalIncome,
+        totalExpenses,
+        netBalance,
+        savingsRate,
+        transactionCount
     };
 }
 
@@ -566,8 +611,12 @@ function getMonthSummary(month) {
  */
 function findTransactionsAboveAmount(amount, month) {
     // TODO: Implement this bonus function
-    return [];
+
+    return sampleTransactions.filter(transaction =>
+        isTransactionInMonth(transaction, month) && transaction.amount > amount
+    );
 }
+
 
 /**
  * BONUS 2: Calculate month-over-month growth
@@ -577,6 +626,8 @@ function findTransactionsAboveAmount(amount, month) {
  */
 function calculateMonthOverMonthGrowth(currentMonth, previousMonth) {
     // TODO: Implement this bonus function
+
+    
     return {
         incomeGrowth: 0,
         expenseGrowth: 0
